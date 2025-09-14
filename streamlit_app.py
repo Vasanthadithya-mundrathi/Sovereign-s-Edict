@@ -6,6 +6,7 @@ import requests
 import pandas as pd
 import json
 import time
+import os
 
 # Function to get theme CSS
 def get_theme_css(theme):
@@ -332,10 +333,10 @@ with st.sidebar:
     
     # Analysis settings
     st.markdown("#### 🧠 Analysis Settings")
-    enable_gemini = st.checkbox("Enable Gemini AI Analysis", value=st.session_state.get('enable_gemini', True))
-    enable_clustering = st.checkbox("Enable Theme Clustering", value=st.session_state.get('enable_clustering', True))
-    enable_sentiment = st.checkbox("Enable Sentiment Analysis", value=st.session_state.get('enable_sentiment', True))
-    enable_citations = st.checkbox("Enable Citation Matching", value=st.session_state.get('enable_citations', True))
+    enable_gemini = st.checkbox("Enable Gemini AI Analysis", value=st.session_state.get('enable_gemini', True), key="sidebar_gemini")
+    enable_clustering = st.checkbox("Enable Theme Clustering", value=st.session_state.get('enable_clustering', True), key="sidebar_clustering")
+    enable_sentiment = st.checkbox("Enable Sentiment Analysis", value=st.session_state.get('enable_sentiment', True), key="sidebar_sentiment")
+    enable_citations = st.checkbox("Enable Citation Matching", value=st.session_state.get('enable_citations', True), key="sidebar_citations")
     
     # Update settings in session state
     st.session_state.enable_gemini = enable_gemini
@@ -541,6 +542,36 @@ with tab2:
                     st.error(f"Failed to ingest data: {response.status_code} - {response.text}")
             except Exception as e:
                 st.error(f"Error connecting to backend: {str(e)}")
+        
+        # Display sample policy document
+        st.subheader("📄 Sample Policy Document")
+        st.markdown("Below is a sample of the Indian Digital Personal Data Protection Act, 2023:")
+        
+        # Try to display the PDF if it exists
+        try:
+            pdf_path = "data/indian_digital_privacy_act_2023_official.pdf"
+            if os.path.exists(pdf_path):
+                with open(pdf_path, "rb") as f:
+                    pdf_data = f.read()
+                    st.download_button(
+                        label="📥 Download Sample Policy PDF",
+                        data=pdf_data,
+                        file_name="indian_digital_privacy_act_2023_official.pdf",
+                        mime="application/pdf"
+                    )
+                
+                # Display first page of PDF as image
+                import pdfplumber
+                with pdfplumber.open(pdf_path) as pdf:
+                    first_page = pdf.pages[0]
+                    # Convert to image
+                    pil_image = first_page.to_image(resolution=100)
+                    st.image(pil_image.original, caption="First Page of Sample Policy Document", use_column_width=True)
+            else:
+                st.info("Sample policy PDF not found in data directory.")
+        except Exception as e:
+            st.warning(f"Could not display sample policy PDF: {str(e)}")
+            st.info("The full policy document is available as a downloadable PDF.")
 
 # Analyze Tab
 with tab3:
@@ -621,10 +652,10 @@ with tab3:
         st.subheader("⚙️ Analysis Options")
         st.markdown("Customize the analysis parameters")
         
-        enable_gemini = st.checkbox("Enable Gemini AI Analysis", value=True)
-        enable_clustering = st.checkbox("Enable Theme Clustering", value=True)
-        enable_sentiment = st.checkbox("Enable Sentiment Analysis", value=True)
-        enable_citations = st.checkbox("Enable Citation Matching", value=True)
+        enable_gemini = st.checkbox("Enable Gemini AI Analysis", value=True, key="analyze_gemini")
+        enable_clustering = st.checkbox("Enable Theme Clustering", value=True, key="analyze_clustering")
+        enable_sentiment = st.checkbox("Enable Sentiment Analysis", value=True, key="analyze_sentiment")
+        enable_citations = st.checkbox("Enable Citation Matching", value=True, key="analyze_citations")
         
         st.subheader("📊 Processing Info")
         st.markdown("""
