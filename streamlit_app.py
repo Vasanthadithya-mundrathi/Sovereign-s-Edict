@@ -566,7 +566,7 @@ with tab2:
                     first_page = pdf.pages[0]
                     # Convert to image
                     pil_image = first_page.to_image(resolution=100)
-                    st.image(pil_image.original, caption="First Page of Sample Policy Document", use_column_width=True)
+                    st.image(pil_image.original, caption="First Page of Sample Policy Document", use_container_width=True)
             else:
                 st.info("Sample policy PDF not found in data directory.")
         except Exception as e:
