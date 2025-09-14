@@ -49,7 +49,7 @@ const AmendmentSuggestion = ({ data }) => {
           relevance_score: 0.88
         }
       ],
-      confidence: 0.85,
+      confidence: 0.82,
       impact: "medium"
     },
     {

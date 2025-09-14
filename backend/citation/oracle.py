@@ -41,7 +41,7 @@ SAMPLE_CITATIONS = [
         type=CitationType.ACADEMIC,
         url="https://example.com/economic-impact",
         summary="Study on the economic effects of implementing strict data privacy regulations.",
-        relevance_score=0.85
+        relevance_score=0.75
     )
 ]
 

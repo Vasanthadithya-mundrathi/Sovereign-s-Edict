@@ -28,7 +28,7 @@ const CitationPanel = ({ data }) => {
       source: "Journal of Digital Economics",
       type: "academic",
       summary: "Study on the economic effects of implementing strict data privacy regulations.",
-      relevance: 0.85,
+      relevance: 0.75,
       url: "https://example.com/economic-impact"
     },
     {
