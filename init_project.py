@@ -162,29 +162,15 @@ def organize_data():
     """Organize data files"""
     print("Organizing data files...")
     
-    # Move sample data files to appropriate locations
-    data_files = [
-        "sample_policy.txt",
-        "data/sample_youtube_scraped.json",
-        "data/sample_instagram_scraped.txt",
-        "data/sample_linkedin_scraped.json"
+    # Create data directory structure
+    data_dirs = [
+        "data/raw",
+        "data/processed"
     ]
     
-    for data_file in data_files:
-        if os.path.exists(data_file):
-            # Determine target directory based on file name
-            if "sample" in data_file:
-                target_dir = "data/sample"
-            else:
-                target_dir = "data/raw"
-                
-            # Create target directory if needed
-            Path(target_dir).mkdir(parents=True, exist_ok=True)
-            
-            # Extract file name
-            file_name = os.path.basename(data_file)
-            shutil.move(data_file, f"{target_dir}/{file_name}")
-            print(f"Moved {data_file} to {target_dir}/")
+    for data_dir in data_dirs:
+        Path(data_dir).mkdir(parents=True, exist_ok=True)
+        print(f"Created directory: {data_dir}")
 
 def create_readme_files():
     """Create README files for each major directory"""
@@ -192,7 +178,7 @@ def create_readme_files():
         "backend/README.md": "# Backend\n\nThis directory contains all backend logic for Sovereign's Edict.",
         "frontend/README.md": "# Frontend\n\nThis directory contains the React frontend application.",
         "backend/plugins/README.md": "# Plugins\n\nThis directory contains modular plugins for data ingestion.",
-        "data/README.md": "# Data\n\nThis directory contains sample data and datasets.",
+        "data/README.md": "# Data\n\nThis directory contains real policy data and datasets for analysis.",
         "models/README.md": "# Models\n\nThis directory contains AI/ML models used in the application.",
         "docs/README.md": "# Documentation\n\nThis directory contains project documentation.",
         "tests/README.md": "# Tests\n\nThis directory contains all test files for the project.",

@@ -110,23 +110,10 @@ class YouTubeIngestor(IngestorModule):
             from backend.plugins.scraped_data_ingestor.plugin import ScrapedDataIngestor
             scraped_ingestor = ScrapedDataIngestor()
             
-            # Create a mock scraped data file for testing
-            mock_data = self._create_mock_scraped_data()
-            import tempfile
-            import json
-            
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:
-                json.dump(mock_data, f)
-                temp_file_path = f.name
-            
-            try:
-                comments = scraped_ingestor.ingest(temp_file_path)
-                logger.info(f"Successfully ingested {len(comments)} comments from YouTube video {video_id} using scraped data fallback")
-                return comments
-            finally:
-                # Clean up temp file
-                import os
-                os.unlink(temp_file_path)
+            # For real data, we would process actual scraped files
+            # In a production environment, this would point to actual scraped data files
+            logger.warning("No API key available and no scraped data file provided. Returning empty result.")
+            return []
             
         except Exception as e:
             logger.error(f"Error ingesting YouTube comments: {str(e)}")
@@ -134,75 +121,16 @@ class YouTubeIngestor(IngestorModule):
     
     def _create_mock_scraped_data(self) -> List[Dict]:
         """
-        Create mock scraped data for testing purposes
+        This method was used for testing but has been removed for production.
+        In a real implementation, actual scraped data would be processed.
         Args:
             None
         Returns:
-            List of mock comment data
+            Empty list (removed mock data for production use)
         """
-        # These are the sample comments you provided for testing
-        return [
-            {
-                "text": "Arnabji a true bharatya always on the side of the people of Bharat against all who are in and out of Bharat Arnabji takes them all right on.... Vande matharam",
-                "author": "user1",
-                "timestamp": "2024-05-20T10:00:00Z",
-                "likes": 150
-            },
-            {
-                "text": "Yes, share market will go up after 4 June and with Modi ji as PM lot of foreign investment will come to India they have trust in Modi ji",
-                "author": "user2",
-                "timestamp": "2024-05-20T10:05:00Z",
-                "likes": 200
-            },
-            {
-                "text": "These rich crooks can get away with anything and everything, money makes it happen.",
-                "author": "user3",
-                "timestamp": "2024-05-20T10:10:00Z",
-                "likes": 85
-            },
-            {
-                "text": "Sorry to say this......Congress old timers are total gone case. I feel pity for the young students whom he teaches management.",
-                "author": "user4",
-                "timestamp": "2024-05-20T10:15:00Z",
-                "likes": 120
-            },
-            {
-                "text": "In 10 years - Petrol price doubled, unemployment at all time high, communal violence and MANIPUR... We don't want BJP anymore",
-                "author": "user5",
-                "timestamp": "2024-05-20T10:20:00Z",
-                "likes": 310
-            },
-            {
-                "text": "Excellent Shehzad…",
-                "author": "user6",
-                "timestamp": "2024-05-20T10:25:00Z",
-                "likes": 95
-            },
-            {
-                "text": "Shehzad u just stole the show; more power to you, keep up the very good work, remarkable",
-                "author": "user7",
-                "timestamp": "2024-05-20T10:30:00Z",
-                "likes": 180
-            },
-            {
-                "text": "This time Modi waves not supported to BJP therefore No wave",
-                "author": "user8",
-                "timestamp": "2024-05-20T10:35:00Z",
-                "likes": 65
-            },
-            {
-                "text": "Debate with Arnab LIVE; PM Modi notches it up ahead of elections 2024, Brand Modi is unstoppable; PM Modi offered prayers and performed Rudra Abhishek at Kashi Vishwanath Temple...",
-                "author": "user9",
-                "timestamp": "2024-05-20T10:40:00Z",
-                "likes": 140
-            },
-            {
-                "text": "The so called professor of strategic management is at loss of words at Shehzad's questions. What kind of a professor is he? He has no facts only rhetoric.",
-                "author": "user10",
-                "timestamp": "2024-05-20T10:45:00Z",
-                "likes": 220
-            }
-        ]
+        # Removed mock data to ensure only real data is used
+        logger.info("Mock data generation removed for production use. Please provide real scraped data files.")
+        return []
     
     def _extract_video_id(self, url: str) -> str:
         """
