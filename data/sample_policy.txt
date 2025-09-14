@@ -1,0 +1,35 @@
+Digital Privacy Protection Act
+
+Section 1. Purpose and Scope
+This Act establishes requirements for the collection, processing, and storage of personal data by digital service providers operating within the jurisdiction.
+
+Section 2. Definitions
+For the purposes of this Act:
+(a) "Personal data" means any information relating to an identified or identifiable natural person.
+(b) "Processing" means any operation performed on personal data.
+(c) "Digital service provider" means any entity that provides digital services to users.
+
+Section 3. Consent Requirements
+Digital service providers must obtain explicit consent from users before collecting or processing their personal data.
+
+Section 4. Data Minimization
+Digital service providers must limit the collection of personal data to what is necessary for the specified purposes.
+
+Section 5. User Rights
+Users have the right to access, rectify, and erase their personal data held by digital service providers.
+
+Section 6. Data Security
+Digital service providers must implement appropriate technical and organizational measures to ensure the security of personal data.
+
+Section 7. Data Breach Notification
+(a) Digital service providers must notify the relevant authority of any personal data breach within 72 hours.
+(b) Where the breach is likely to result in a high risk to the rights and freedoms of individuals, the provider must also notify the affected individuals without undue delay.
+
+Section 8. International Data Transfers
+Personal data may only be transferred to countries that provide an adequate level of data protection.
+
+Section 9. Enforcement
+This Act shall be enforced by the Data Protection Authority, which has the power to investigate complaints and impose penalties.
+
+Section 10. Penalties
+Violations of this Act may result in fines of up to 4% of annual global turnover or €20 million, whichever is higher.

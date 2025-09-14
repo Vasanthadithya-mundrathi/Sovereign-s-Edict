@@ -1,0 +1,49 @@
+# Core Python Requirements for Sovereign's Edict
+
+# Web Framework
+fastapi>=0.68.0
+uvicorn>=0.15.0
+websockets>=10.0
+
+# Data Processing
+pandas>=1.3.0
+numpy>=1.21.0
+python-dateutil>=2.8.0
+
+# Natural Language Processing
+spacy>=3.2.0
+transformers>=4.12.0
+torch>=1.10.0
+sentence-transformers>=2.1.0
+
+# Text Analysis & Clustering
+scikit-learn>=1.0.0
+umap-learn>=0.5.0
+bertopic>=0.9.0
+
+# Database
+sqlalchemy>=1.4.0
+# sqlite3 is included in Python standard library, no need to install
+
+# Utilities
+pydantic>=1.8.0
+python-multipart>=0.0.5
+requests>=2.25.0
+
+# For PDF processing
+PyPDF2>=1.26.0
+pdfplumber>=0.6.0
+
+# For data validation
+pydantic>=1.8.0
+
+# For testing
+pytest>=6.2.0
+httpx>=0.18.0
+
+# For development
+black>=21.0
+flake8>=3.9.0
+
+# For Google Gemini API
+google-generativeai>=0.3.0

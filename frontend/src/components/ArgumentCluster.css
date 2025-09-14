@@ -1,0 +1,164 @@
+.cluster-container {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cluster-container h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.cluster-description {
+  background-color: #e3f2fd;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.cluster-description p {
+  margin: 0;
+  color: #1976d2;
+}
+
+.cluster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cluster-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cluster-card.expanded {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.cluster-header {
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-left: 4px solid #3498db;
+  transition: background-color 0.2s ease;
+}
+
+.cluster-header:hover {
+  background-color: #edf2f7;
+}
+
+.cluster-title h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.cluster-count {
+  font-size: 0.9em;
+  color: #7f8c8d;
+  margin-left: 10px;
+}
+
+.cluster-sentiment .sentiment-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.cluster-toggle {
+  font-size: 1.2em;
+  color: #7f8c8d;
+}
+
+.cluster-content {
+  padding: 20px;
+  background-color: white;
+}
+
+.cluster-content h5 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.cluster-content ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.cluster-content li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.cluster-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-secondary {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+
+.btn-secondary:hover {
+  background-color: #d5dbdb;
+}
+
+@media (max-width: 768px) {
+  .cluster-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .cluster-title {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cluster-count {
+    margin-left: 0;
+  }
+  
+  .cluster-sentiment {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .cluster-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary, .btn-secondary {
+    width: 100%;
+  }
+}
