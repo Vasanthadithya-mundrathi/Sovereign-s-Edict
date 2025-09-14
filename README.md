@@ -4,10 +4,6 @@
 
 Sovereign's Edict is a ground-truthed, scalable, and ethically robust public consultation intelligence engine. Moving beyond shallow sentiment analysis, it delivers real-time, clause-level "argument maps" and suggested policy maneuvers—giving policymakers a true X-ray of public feedback, with every insight backed by verifiable sources.
 
-## Problem Statement
-
-Ministries face thousands of comments on proposed laws but lack tools for extracting actionable intelligence. Mere "sentiment" is useless; real decision-making needs to know the why, where, and how behind opposition and support.
-
 ## Key Features
 
 1. **Clause-Level Battlefield Map**: Visually shows where (which clauses/sections) the sharpest opposition or support clusters.
@@ -31,7 +27,8 @@ Ministries face thousands of comments on proposed laws but lack tools for extrac
 - **Database**: SQLite (MVP), PostgreSQL (Production)
 
 ### Frontend
-- **Framework**: React/Next.js
+- **Default**: Streamlit (no setup required)
+- **Alternative**: React/Next.js
 - **Visualization**: D3.js, Chart.js, Custom Components
 - **Real-time**: WebSocket connections
 
@@ -40,41 +37,10 @@ Ministries face thousands of comments on proposed laws but lack tools for extrac
 - **Hybrid**: Cloud offload for large-scale processing
 - **Containerization**: Docker support
 
-## Directory Structure
-
-```
-Sovereign's Edict/
-├── backend/
-│   ├── api/          # API endpoints
-│   ├── ingestion/    # Data ingestion modules
-│   ├── mining/       # Argument mining core with Gemini API integration
-│   ├── citation/     # Citation oracle
-│   ├── fusion/       # Multi-source fusion engine
-│   ├── amendment/    # Amendment generator
-│   ├── compute/      # Compute management
-│   ├── models/       # Data models
-│   ├── utils/        # Utility functions
-│   └── tests/        # Unit tests
-├── frontend/
-│   ├── components/   # React visualization components
-│   ├── pages/        # Page components
-│   ├── assets/       # Static assets
-│   ├── services/     # API services
-│   ├── utils/        # Utility functions
-│   └── tests/        # Unit tests
-├── data/             # Sample data and datasets
-├── models/           # AI/ML models
-├── docs/             # Documentation
-├── requirements.txt  # Python dependencies
-├── PROJECT_PLAN.md   # Project plan
-└── TECHNICAL_SPEC.md # Technical specification
-```
-
 ## Getting Started
 
 ### Prerequisites
 - Python 3.8+
-- Node.js 16+
 - Google Gemini API Key
 - Docker (optional, for containerized deployment)
 
@@ -82,7 +48,7 @@ Sovereign's Edict/
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Vasanthadithya-mundrathi/Sovereign-s-Edict.git
    cd "Sovereign's Edict"
    ```
 
@@ -94,13 +60,7 @@ Sovereign's Edict/
 3. Set up environment variables:
    ```bash
    cp .env.example .env
-   # Edit .env file to add your GEMINI_API_KEY
-   ```
-
-4. Install frontend dependencies:
-   ```bash
-   cd frontend
-   npm install
+   # Edit .env file to add your GEMINI_API_KEY and other required API keys
    ```
 
 ### Security Notice
@@ -110,14 +70,21 @@ Always use `.env.example` as a template for required environment variables.
 
 ### Running the Application
 
-#### Option 1: Using Docker (Recommended)
+#### Option 1: Default Setup (Streamlit Frontend) - Recommended
+```bash
+python start_streamlit.py
+```
+
+This will start both the backend (port 8001) and Streamlit frontend (port 8503) services.
+
+#### Option 2: Using Docker
 ```bash
 docker-compose up
 ```
 
 This will start both the backend (port 8000) and frontend (port 3000) services.
 
-#### Option 2: Manual Installation
+#### Option 3: Manual Installation
 
 1. Start the backend server:
    ```bash
@@ -125,11 +92,27 @@ This will start both the backend (port 8000) and frontend (port 3000) services.
    python main.py
    ```
 
-2. In a separate terminal, start the frontend:
+2. In a separate terminal, start the Streamlit frontend:
+   ```bash
+   streamlit run streamlit_app.py
+   ```
+
+#### Option 4: React Frontend (Advanced)
+1. Install frontend dependencies:
    ```bash
    cd frontend
+   npm install
+   ```
+
+2. Start the React frontend:
+   ```bash
    npm start
    ```
+
+#### Option 5: Gradio Frontend (Alternative)
+```bash
+python gradio_app.py
+```
 
 ## Enhanced Features
 
@@ -148,32 +131,72 @@ Completely redesigned user interface with:
 - Data-backed policy amendment suggestions
 - Responsive design for all device sizes
 
-## Development Roadmap
+### Plugin System
+Sovereign's Edict now supports a modular plugin architecture:
+- **YouTube Ingestor**: Ingest comments from YouTube videos using the YouTube Data API
+- **Instagram Ingestor**: Ingest comments from Instagram posts using the Instagram Graph API
+- **LinkedIn Ingestor**: Ingest comments from LinkedIn posts using the LinkedIn API
+- **Government Database Ingestor**: Access government consultation databases
+- **Scraped Data Ingestor**: Process data collected from high-scraping tools
+- **Indian Legal Policy Ingestor**: Process Indian legal policy documents
+- **Extensible Framework**: Create your own plugins for new data sources
 
-### Phase 1: MVP (Completed)
-- Backend core pipeline with Gemini integration
-- Advanced argument mining engine
-- Enhanced frontend dashboard with visualizations
-- Synthetic demo data
+For more information about the plugin system, see [Plugin Documentation](backend/plugins/README.md)
 
-### Phase 2: Enhanced Features (In Progress)
-- Database of citations
-- Multi-source data fusion
-- Validation scripts
-- Improved visualizations
+### Multiple Frontend Options
+Choose the frontend that works best for your needs:
+- **Streamlit (Default)**: Simple, no-setup required interface
+- **React Web App**: Full-featured web application
+- **Gradio**: Alternative no-setup interface
 
-### Phase 3: Polish & Documentation
-- Demo refinement
-- Documentation
-- Testing and bug fixes
+## Deployment
 
-## Team Roles
+### Streamlit Cloud Deployment
 
-1. **NLP/AI Engineer**: LLM fine-tuning, argument/citation mining
-2. **Backend Dev**: API, data processing pipeline
-3. **Frontend Dev**: Dashboard, visualization/UX
-4. **Domain Curator**: Sample policies, legal databases, scenario data
-5. **Demo Lead**: Scripts, scenario walkthrough, judge interaction
+1. Fork this repository to your GitHub account
+2. Go to [Streamlit Cloud](https://streamlit.io/cloud)
+3. Create a new app and connect it to your forked repository
+4. Set the main file path to `streamlit_app.py`
+5. Add your API keys in the Secrets section:
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - Other optional keys as needed
+
+### Heroku Deployment
+
+1. Install the Heroku CLI
+2. Login to Heroku: `heroku login`
+3. Create a new Heroku app: `heroku create your-app-name`
+4. Set environment variables:
+   ```bash
+   heroku config:set GEMINI_API_KEY=your_gemini_api_key
+   ```
+5. Deploy the app: `git push heroku main`
+
+### Docker Deployment
+
+1. Build the Docker images:
+   ```bash
+   docker-compose build
+   ```
+
+2. Run the application:
+   ```bash
+   docker-compose up
+   ```
+
+## Development
+
+### Running Tests
+
+```bash
+make test
+```
+
+### Code Style
+
+- Follow PEP 8 guidelines for Python code
+- Use meaningful variable and function names
+- Write docstrings for all functions and classes
 
 ## Contributing
 
@@ -181,7 +204,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
@@ -199,4 +222,4 @@ The project follows strict security practices to protect sensitive information:
 - Regular security audits are conducted to identify and address vulnerabilities
 - Dependencies are regularly updated to patch known security issues
 
-For more detailed information, see [SECURITY.md](docs/SECURITY.md).
+For more detailed information, see [SECURITY.md](SECURITY.md).

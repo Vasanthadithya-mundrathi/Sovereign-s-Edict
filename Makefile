@@ -16,8 +16,10 @@ help:
 	@echo "  make install-backend     Install backend dependencies"
 	@echo "  make install-frontend    Install frontend dependencies"
 	@echo "  make run-backend         Run backend server"
-	@echo "  make run-frontend        Run frontend server"
-	@echo "  make run-all             Run both backend and frontend"
+	@echo "  make run-frontend        Run Streamlit frontend (default)"
+	@echo "  make run-react           Run React frontend"
+	@echo "  make run-all             Run both backend and Streamlit frontend (default)"
+	@echo "  make run-react-all       Run both backend and React frontend"
 	@echo "  make docker-build        Build Docker images"
 	@echo "  make docker-run          Run application with Docker"
 	@echo "  make test                Run backend tests"
@@ -38,15 +40,28 @@ install-frontend:
 run-backend:
 	cd backend && $(PYTHON) main.py
 
-# Run frontend server
+# Run Streamlit frontend (default)
 .PHONY: run-frontend
 run-frontend:
+	$(PYTHON) -m streamlit run streamlit_app.py
+
+# Run React frontend
+.PHONY: run-react
+run-react:
 	cd frontend && $(NODE) start
 
-# Run both backend and frontend
+# Run both backend and Streamlit frontend (default)
 .PHONY: run-all
 run-all:
-	@echo "Starting backend and frontend servers..."
+	@echo "Starting backend and Streamlit frontend servers..."
+	@echo "Backend API: http://localhost:8001"
+	@echo "Streamlit UI: http://localhost:8503"
+	$(PYTHON) start_streamlit.py
+
+# Run both backend and React frontend
+.PHONY: run-react-all
+run-react-all:
+	@echo "Starting backend and React frontend servers..."
 	@echo "Backend: http://localhost:8000"
 	@echo "Frontend: http://localhost:3000"
 	cd backend && $(PYTHON) main.py & cd frontend && $(NODE) start

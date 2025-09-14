@@ -37,13 +37,9 @@ pdfplumber>=0.6.0
 # For data validation
 pydantic>=1.8.0
 
-# For testing
-pytest>=6.2.0
-httpx>=0.18.0
-
-# For development
-black>=21.0
-flake8>=3.9.0
-
 # For Google Gemini API
 google-generativeai>=0.3.0
+
+# For alternative frontends
+streamlit>=1.12.0
+gradio>=3.23.0
