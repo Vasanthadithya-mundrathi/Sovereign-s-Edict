@@ -91,9 +91,10 @@ Sovereign's Edict/
    pip install -r requirements.txt
    ```
 
-3. Set up Gemini API key:
+3. Set up environment variables:
    ```bash
-   export GEMINI_API_KEY="your-api-key-here"
+   cp .env.example .env
+   # Edit .env file to add your GEMINI_API_KEY
    ```
 
 4. Install frontend dependencies:
@@ -101,6 +102,11 @@ Sovereign's Edict/
    cd frontend
    npm install
    ```
+
+### Security Notice
+**Important**: Never commit sensitive information like API keys to the repository. 
+The `.env` file is included in `.gitignore` to prevent accidental exposure of credentials.
+Always use `.env.example` as a template for required environment variables.
 
 ### Running the Application
 
@@ -183,3 +189,14 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - SIH 2025 organizers
 - Legal experts and policy analysts who contributed to the domain knowledge
 - Google for the Gemini API
+
+## Security
+
+The project follows strict security practices to protect sensitive information:
+
+- Environment variables are managed through `.env` files that are excluded from version control
+- All sensitive data is properly handled according to data protection regulations
+- Regular security audits are conducted to identify and address vulnerabilities
+- Dependencies are regularly updated to patch known security issues
+
+For more detailed information, see [SECURITY.md](docs/SECURITY.md).

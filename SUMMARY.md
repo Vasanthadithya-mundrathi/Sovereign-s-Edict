@@ -114,7 +114,7 @@ We've provided multiple deployment options:
 - Job routing (local/hybrid/cloud)
 - Resource optimization
 
-## Technical Architecture
+## Technical Implementation
 
 ### Backend Stack
 - **Language**: Python 3.9
@@ -135,6 +135,18 @@ We've provided multiple deployment options:
 - **Orchestration**: Docker Compose
 - **Local Development**: Direct execution or Docker
 - **Cloud Deployment**: Docker containers
+
+## Security Measures
+
+### Environment Variable Protection
+- The `.env` file containing sensitive API keys is excluded from Git tracking
+- A comprehensive `.gitignore` file prevents accidental exposure of credentials
+- Security documentation provides guidelines for secure development practices
+
+### Data Handling
+- The system follows a strict data security policy that prohibits storing raw personal data
+- All arguments are displayed in aggregate without personally identifying information
+- Secure data processing practices are implemented throughout the application
 
 ## Next Steps for Full Implementation
 
