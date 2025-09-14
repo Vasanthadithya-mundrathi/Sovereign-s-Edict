@@ -45,6 +45,7 @@ def extract_arguments(comments: List[Comment]) -> List[Argument]:
         # In reality, this would use a trained model
         argument_type = detect_argument_type(processed_text)
         themes = extract_themes(processed_text)
+        confidence = calculate_confidence(processed_text, argument_type, themes)
         
         argument = Argument(
             id=str(uuid.uuid4()),
@@ -53,7 +54,7 @@ def extract_arguments(comments: List[Comment]) -> List[Argument]:
             type=argument_type,
             themes=themes,
             clause=comment.policy_clause,
-            confidence=0.85  # Placeholder confidence score
+            confidence=confidence  # Dynamic confidence score
         )
         
         arguments.append(argument)
@@ -109,3 +110,32 @@ def extract_themes(text: str) -> List[str]:
         themes = ['general']
     
     return themes
+
+
+def calculate_confidence(text: str, argument_type: ArgumentType, themes: List[str]) -> float:
+    """
+    Calculate confidence based on the strength of detected arguments and themes
+    """
+    # Base confidence
+    confidence = 0.5
+    
+    # Increase confidence based on argument type strength
+    if argument_type != ArgumentType.NEUTRAL:
+        confidence += 0.2
+    
+    # Increase confidence based on number of themes detected
+    confidence += min(len(themes) * 0.1, 0.3)
+    
+    # Increase confidence based on keyword density
+    support_keywords = ['support', 'agree', 'good', 'benefit', 'positive', 'favor']
+    objection_keywords = ['against', 'disagree', 'bad', 'negative', 'concern', 'problem', 'issue']
+    
+    text_lower = text.lower()
+    support_count = sum(text_lower.count(keyword) for keyword in support_keywords)
+    objection_count = sum(text_lower.count(keyword) for keyword in objection_keywords)
+    
+    keyword_density = (support_count + objection_count) / max(len(text_lower.split()), 1)
+    confidence += min(keyword_density * 2, 0.2)
+    
+    # Ensure confidence is between 0 and 1
+    return max(0.0, min(1.0, confidence))
